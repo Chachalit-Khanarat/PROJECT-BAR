@@ -4,9 +4,9 @@ from game_config import *
 
 
 class Game_UI:
-    def draw_ui(self, screen):
+    def draw_ui(self):
         tmp = pg.Surface(Config.panel_size, pg.SRCALPHA)
-        
+         
 
 class Drawer:
 
@@ -26,14 +26,14 @@ class Drawer:
         self.__ui = Game_UI()
 
     def background(self):
-        rect1 = pg.Rect(Config.game_width//100,Config.game_height//100,int(Config.game_width*49/50),int(Config.game_height*49/50))
-        pg.draw.rect(self.__screen,Drawer.GetColor("LPP"),rect1)
+        pic = pg.image.load("data/Project Bar.png").convert()
+        self.__screen.blit(pic,(0,0))
     
     def draw(self):
         tmp = pg.Surface((Config.panel_size))
         self.__screen.fill(self.GetColor('PP'))
         self.background()
-        self.__ui.draw_ui(self.__screen)
+        self.__ui.draw_ui()
 
     def UpdateAll(self):
         self.draw()
@@ -43,6 +43,7 @@ class Drawer:
 class Game:
     def __init__(self):
         self.__draw = Drawer()
+        self.__state = "playing"
 
     def gameupdate(self):
         pass
@@ -54,24 +55,6 @@ class Game:
             for ev in pg.event.get():
                 if ev.type == pg.QUIT:
                     running == False
-                if ev.type == pg.KEYDOWN:
-                    if game.__state == 'playing':     
-                        if ev.key == pg.K_q:
-                            self.__piece.move_current(-1,0)
-                        if ev.key == pg.K_w:
-                            self.__piece.move_current(1,0)
-                        if ev.key == pg.K_e:
-                            self.__piece.rotate_current()
-                        if ev.key == pg.K_r:
-                            self.__piece.falling()
-                        if ev.key == pg.K_t:
-                            self.__piece.force_falling()
-                        if ev.key == pg.K_a:
-                            self.__piece.move_current(-1,0)
-                        if ev.key == pg.K_s:
-                            self.__piece.move_current(1,0)
-                        if ev.key == pg.K_SPACE:
-                            self.__game_reset()
 
             self.gameupdate()
             self.__draw.UpdateAll()
