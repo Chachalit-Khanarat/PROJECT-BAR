@@ -1,15 +1,26 @@
 from drawer import *
+from customer import *
+from drinks import *
 
 class Game:
-    def __init__(self):
+    def __init__(self, mode = "endless"):
         self.__draw = Draw_manager()
+        self.__mode = mode
         self.__state = "bar"
         self.__mixer = Mixer()
         self.__drinks = Drinks()
         self.__drink = None
+        self.__customer = None
 
     def gameupdate(self):
-        pass
+        self.__draw.UpdateAll(self.__state)
+        self.__draw.mixer(self.__mixer, self.__drink)
+
+        if self.__customer is None:
+            customer_type = random.choice([male_npc(), female_npc()])
+            self.__customer = customer_type
+
+        self.__draw.draw_customer(self.__customer)
 
     def run(self):
         print("RUN")
@@ -17,7 +28,7 @@ class Game:
         while (running):
             for ev in pg.event.get():
                 if ev.type == pg.QUIT:
-                    running == False
+                    running = False
                 if ev.type == pg.KEYDOWN:
                     if game.__state == 'bar':     
                         if ev.key == pg.K_q:
@@ -45,11 +56,10 @@ class Game:
                                 self.__mixer.reset_mixer()
 
             self.gameupdate()
-            self.__draw.UpdateAll(self.__state)
-            self.__draw.mixer(self.__mixer, self.__drink)
             pg.display.flip()
+
         pg.quit()
-        print("Exit Run")
+        print("Exit")
 
 if __name__ == "__main__":
     game = Game()

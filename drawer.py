@@ -29,6 +29,16 @@ class Draw_manager:
     def draw(self, state):
         self.__screen.fill(self.GetColor('PP'))
         self.background(state)
+    
+    def draw_customer(self, customer):
+        print(customer.sprite)
+        if customer.sprite:
+            pic = pg.image.load(f"sprite/customer/{customer.sprite[0]}").convert_alpha()
+            self.__screen.blit(pic, customer.sprite[1])
+        if customer.line:
+            font = pg.font.Font(size = 34)
+            text = font.render(customer.line, True, (255, 255, 255))
+            self.__screen.blit(text, (57, 724))
 
     def UpdateAll(self,state):
         self.draw(state)

@@ -53,6 +53,14 @@ class Game_UI:
             if drink:
                 pic = pg.image.load(f"drink_img/{drink}.png").convert_alpha()
                 screen.blit(pic, (1302.7,486.6))
+    
+    def draw_customer(self, customer, screen):
+        if customer.sprite:
+            pic = pg.image.load(f"data/{customer.sprite[0]}").convert_alpha()
+            screen.blit(pic, customer.sprite[1])
+            font = pg.font.Font(None, 30)
+            text = font.render(customer.line, True, (255, 255, 255))
+            screen.blit(text, (customer.sprite[1][0], customer.sprite[1][1] - 20))
 
     def draw_mixer(self, mixer : Mixer, screen):
 

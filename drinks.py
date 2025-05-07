@@ -1,7 +1,6 @@
 import pandas as pd
 import time
 
-
 class Mixer :
     def __init__(self):
         self.A = 0
@@ -133,3 +132,6 @@ class Drinks:
     
     def check_drink(self,drink,ndrink,nfla,ntype):
         return drink == ndrink, nfla == self.get_fla(drink), ntype in self.get_type(drink)
+    
+    def get_drink_list_w_con(self, condition):
+        return self.drinks[(self.drinks["Type"] == condition)|(self.drinks["Sec_Type"] == condition)|(self.drinks["Flavour"] == condition)]["Drinks"].tolist()

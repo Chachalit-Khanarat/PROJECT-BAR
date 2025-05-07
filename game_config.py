@@ -17,8 +17,8 @@ class Config:
     counter_size = (25.6, 58.6)
     shaker_size = (43.3, 22.5)
     
-    aged_rocks_loc = {"Aged" : (1104.5, 703.7),
-                      "Rocks" : (1145.8, 703.7)}
+    aged_rocks_loc = {"Rocks" : (1101.4, 703.7),
+                      "Aged" : (1142.7, 703.7)}
     
     
     aged_rocks_size = (34.3, 78.4)
