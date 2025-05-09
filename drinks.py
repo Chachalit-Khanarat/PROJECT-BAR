@@ -86,10 +86,17 @@ class Mixer :
 
 
 class Drinks:
+
+    __instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls.__instance:
+            cls.__instance = super(Drinks, cls).__new__(cls, *args, **kwargs)
+        return cls.__instance
+
     def __init__(self):
         self.drinks = pd.read_csv("data\menus.csv")
         self.drinks = self.drinks.set_index(self.drinks["Drinks"])
-        print(type(self.drinks))
     
     def get_price(self, drink):
         return self.drinks["Price"][drink]
@@ -128,10 +135,15 @@ class Drinks:
         return (self.drinks[self.drinks["Drinks"] == drink]["Flavour"].item())
     
     def get_type(self, drink):
-        return (self.drinks[self.drinks["Drinks"] == drink]["Type"].item(),self.drinks[self.drinks["Drinks"] == drink]["Sec_Type"].item())
+        return (self.drinks[self.drinks["Drinks"] == drink]["Type"].item(),
+                self.drinks[self.drinks["Drinks"] == drink]["Sec_Type"].item())
     
     def check_drink(self,drink,ndrink,nfla,ntype):
         return drink == ndrink, nfla == self.get_fla(drink), ntype in self.get_type(drink)
     
     def get_drink_list_w_con(self, condition):
-        return self.drinks[(self.drinks["Type"] == condition)|(self.drinks["Sec_Type"] == condition)|(self.drinks["Flavour"] == condition)]["Drinks"].tolist()
+        return self.drinks[
+                            (self.drinks["Type"] == condition)
+                           |(self.drinks["Sec_Type"] == condition)
+                           |(self.drinks["Flavour"] == condition)
+                           ]["Drinks"].tolist()

@@ -51,8 +51,14 @@ class Game_UI:
 
         elif mixer.state == 3:
             if drink:
-                pic = pg.image.load(f"drink_img/{drink}.png").convert_alpha()
+                pic = pg.image.load(f"sprite/drink_img/{drink}.png").convert_alpha()
                 screen.blit(pic, (1302.7,486.6))
+                font = pg.font.Font("data/Font/norwester.otf", 35)
+                drink = drink.replace("_", " ").title()
+                text = font.render(drink, True, (255, 255, 255))
+                text_rect = text.get_rect(center=(1302.7 + pic.get_width() / 2, 486.6 + pic.get_height() / 2), y = 669.5)
+                screen.blit(text, text_rect)
+
     
     def draw_customer(self, customer, screen):
         if customer.sprite:

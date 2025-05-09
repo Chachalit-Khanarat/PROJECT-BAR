@@ -20,5 +20,8 @@ class Config:
     aged_rocks_loc = {"Rocks" : (1101.4, 703.7),
                       "Aged" : (1142.7, 703.7)}
     
+    Text_loc = (56,724)
+    Text_size = 50
+
     
     aged_rocks_size = (34.3, 78.4)
