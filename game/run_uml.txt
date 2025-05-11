@@ -1,0 +1,13 @@
+@startuml
+class StartMenuUI {
+    + __init__(self)
+    + start_game(self)
+    + run_game(self)
+    + run_menu(self)
+    + show_statistics(self)
+    + open_settings(self)
+}
+
+StartMenuUI --> Game
+StartMenuUI --> MenuGUI
+@enduml

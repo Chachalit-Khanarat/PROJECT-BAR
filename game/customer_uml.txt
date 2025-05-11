@@ -1,0 +1,105 @@
+@startuml
+class Customer {
+    - loc: tuple
+    - sprite: tuple
+    - name: str
+    - fdrinks: list
+    - line: str
+    - prevference: str
+    - state: int
+    - satisfaction: int
+    + __init__(self)
+    + __repr__(self): str
+    + get_drink(self): list
+    + get_order(self)
+    + give_drink(self, drink: str): bool
+    + get_customer(cls): Customer
+}
+
+class male_npc {
+    + __init__(self)
+    + randrink(self)
+    + get_sprite(self): tuple
+}
+
+class female_npc {
+    + __init__(self)
+    + randrink(self)
+    + get_sprite(self): tuple
+}
+
+class pixelmiku {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self): bool
+    + give_drink(self, drink: str): bool
+}
+
+class sans {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self): bool
+    + give_drink(self, drink: str): bool
+}
+
+class mark {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self): bool
+    + give_drink(self, drink: str): bool
+}
+
+class cyberman {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self)
+    + give_drink(self, drink: str): bool
+}
+
+class dalek {
+    + __init__(self)
+    + get_sprite(self): tuple
+    + randrink(self)
+    + get_order(self)
+    + give_drink(self, drink: str): bool
+}
+
+class thedoctor {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self)
+    + give_drink(self, drink: str): bool
+}
+
+class masterchief {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self): bool
+    + give_drink(self, drink: str): bool
+}
+
+class bigboss {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self): bool
+    + give_drink(self, drink: str): bool
+}
+
+class kiryu {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self)
+}
+
+Customer <|-- male_npc
+Customer <|-- female_npc
+Customer <|-- pixelmiku
+Customer <|-- sans
+Customer <|-- mark
+Customer <|-- cyberman
+Customer <|-- dalek
+Customer <|-- thedoctor
+Customer <|-- masterchief
+Customer <|-- bigboss
+Customer <|-- kiryu
+@enduml

@@ -1,0 +1,42 @@
+@startuml
+class Game {
+    - __instance: Game
+    - __data: DataManager
+    - __draw: Draw_manager
+    - __mixer: Mixer
+    - __drinks: Drinks
+    - __sound: SoundManager
+    - __player: PlayerData
+    - __mode: str
+    - __state: str
+    - start_ticks: int
+    - timer: int
+    - rent: int
+    - __shop: ShopGUI
+    - __drink: Drinks
+    - __customer: Customer
+    + __new__(cls, *args, **kwargs): Game
+    + __init__(self, mode="endless")
+    + get_instance(cls): Game
+    + get_state(self): str
+    + get_sound(self): SoundManager
+    + new_rent(self)
+    + game_reset(self)
+    + gameupdate(self)
+    + get_time_left(self): int
+    + day_end(self)
+    + customer_update(self)
+    + drink_update(self)
+    + run(self)
+    + __repr__(self): str
+}
+
+Game --> DataManager
+Game --> Draw_manager
+Game --> Mixer
+Game --> Drinks
+Game --> SoundManager
+Game --> PlayerData
+Game --> ShopGUI
+Game --> Customer
+@enduml

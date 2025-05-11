@@ -1,0 +1,23 @@
+@startuml
+
+class DataVisualizer {
+    - str output_dir
+    - DataFrame customer_data
+    - DataFrame player_data
+    - DataFrame item_data
+    + DataVisualizer(output_dir: str="data/graph")
+    + void load_customer_data()
+    + void load_player_data()
+    + void load_item_data()
+    + void plot_customer_frequency()
+    + void plot_customer_frequency_pie()
+    + void plot_customer_satisfaction()
+    + void plot_average_money_per_day()
+    + void plot_player_money_vs_rent(player_id: int)
+    + void plot_average_player_money_vs_rent()
+    + void plot_item_purchase_frequency()
+    + void plot_item_correlation()
+    + void run_all_methods()
+}
+
+@enduml

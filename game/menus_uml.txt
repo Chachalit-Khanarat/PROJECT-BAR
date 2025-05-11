@@ -1,0 +1,17 @@
+@startuml
+class MenuGUI {
+    - filter: str
+    - flavour_filter: str
+    - type_filter: str
+    - __menu: DataManager
+    - items: DataFrame
+    - scrollable_frame: Frame
+    + __init__(self)
+    + create_filter_buttons(self, parent)
+    + apply_filter(self, filter_value: str, filter_category: str)
+    + create_scrollable_menus(self)
+    + populate_items(self)
+}
+
+MenuGUI --> DataManager
+@enduml

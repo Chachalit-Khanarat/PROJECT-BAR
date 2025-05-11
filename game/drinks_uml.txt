@@ -1,0 +1,42 @@
+@startuml
+class Mixer {
+    - A: int
+    - B: int
+    - D: int
+    - F: int
+    - K: int
+    - Rock: bool
+    - Aged: bool
+    - shake_time: float
+    - mix_type: str
+    - state: int
+    + __init__(self)
+    + reset_mixer(self)
+    + in_mixer(self): int
+    + add_A(self): bool
+    + add_B(self): bool
+    + add_D(self): bool
+    + add_F(self): bool
+    + add_K(self): bool
+    + set_rock(self)
+    + set_ages(self)
+    + shake(self)
+}
+
+class Drinks {
+    - __instance: Drinks
+    - drinks: DataFrame
+    + __new__(cls, *args, **kwargs): Drinks
+    + __init__(self)
+    + get_price(self, drink: str): int
+    + get_drink(self, mixer: Mixer): str
+    + get_des(self, drink: str): str
+    + get_fla(self, drink: str): str
+    + get_type(self, drink: str): tuple
+    + check_drink(self, drink: str, ndrink: str, nfla: str, ntype: str): tuple
+    + get_drink_list_w_con(self, condition: str): list
+}
+
+Drinks --> Mixer
+Drinks --> DataManager
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+class Draw_manager {
+    - __instance: Draw_manager
+    - __screen: Surface
+    - __clock: Clock
+    - __ui: Game_UI
+    - __cus_alpha: int
+    - __line_alpha: int
+    + __new__(cls, *args, **kwargs): Draw_manager
+    + get_instance(cls): Draw_manager
+    + GetColor(k: str): tuple
+    + __init__(self)
+    + get_screen(self): Surface
+    + reset_cus_alpha(self): bool
+    + reset_line_alpha(self)
+    + draw(self, state: str)
+    + mixer(self, mixer: Mixer, drink=None)
+    + background(self, state: str)
+    + draw_end(self, player: PlayerData, rent: int)
+    + draw_over(self, player: PlayerData)
+    + draw_day(self)
+    + draw_chat(self, text: str)
+    + draw_character(self, character: tuple, state: int)
+    + draw_time(self, time: int)
+    + draw_customer(self, customer: Customer)
+    + UpdateAll(self, state: str)
+}
+
+Draw_manager --> Game_UI
+Draw_manager --> Mixer
+Draw_manager --> PlayerData
+Draw_manager --> Customer
+@enduml

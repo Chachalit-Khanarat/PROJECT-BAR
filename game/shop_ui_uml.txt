@@ -1,0 +1,15 @@
+@startuml
+class ShopGUI {
+    - items: list
+    - balance: float
+    - balance_label: Label
+    - scrollable_frame: Frame
+    + __init__(self)
+    + create_scrollable_shop(self)
+    + populate_items(self)
+    + buy_item(self, item: dict)
+}
+
+ShopGUI --> DataManager
+ShopGUI --> PlayerData
+@enduml

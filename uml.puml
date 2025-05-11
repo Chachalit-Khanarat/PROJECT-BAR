@@ -1,0 +1,397 @@
+@startuml
+scale 0.5
+' Classes in the game folder
+class StartMenuUI {
+    - DataVisualizer __graph
+    + StartMenuUI()
+    + void start_game()
+    + void run_game()
+    + void run_menu()
+    + void show_statistics()
+    + void show_player_statistics()
+    + void show_player_graph()
+    + void open_settings()
+}
+
+
+
+
+class Game {
+    - DataManager __data
+    - Draw_manager __draw
+    - Mixer __mixer
+    - Drinks __drinks
+    - SoundManager __sound
+    - PlayerData __player
+    - str __mode
+    - str __state
+    - int start_ticks
+    - int timer
+    - float rent
+    - ShopGUI __shop
+    - str __drink
+    - Customer __customer
+    + Game(mode: str="endless")
+    + static Game get_instance()
+    + str get_state()
+    + SoundManager get_sound()
+    + void new_rent()
+    + void game_reset()
+    + void gameupdate()
+    + int get_time_left()
+    + void day_end()
+    + void customer_update()
+    + void drink_update()
+    + void run()
+    + str __repr__()
+}
+
+
+
+
+
+class Mixer {
+    - A: int
+    - B: int
+    - D: int
+    - F: int
+    - K: int
+    - Rock: bool
+    - Aged: bool
+    - shake_time: float
+    - mix_type: str
+    - state: int
+    + __init__(self)
+    + reset_mixer(self)
+    + in_mixer(self): int
+    + add_A(self): bool
+    + add_B(self): bool
+    + add_D(self): bool
+    + add_F(self): bool
+    + add_K(self): bool
+    + set_rock(self)
+    + set_ages(self)
+    + shake(self)
+}
+
+class Drinks {
+    - __instance: Drinks
+    - drinks: DataFrame
+    + __new__(cls, *args, **kwargs): Drinks
+    + __init__(self)
+    + get_price(self, drink: str): int
+    + get_drink(self, mixer: Mixer): str
+    + get_des(self, drink: str): str
+    + get_fla(self, drink: str): str
+    + get_type(self, drink: str): tuple
+    + check_drink(self, drink: str, ndrink: str, nfla: str, ntype: str): tuple
+    + get_drink_list_w_con(self, condition: str): list
+}
+
+
+class PlayerData {
+    - __instance: PlayerData
+    - __player_id: int
+    - __money: float
+    - __day: int
+    - __mistakes: int
+    - __drinks: int
+    - __customers: int
+    - __items: list
+    - day_mistakes: int
+    - day_drinks: int
+    - day_customers: int
+    - day_money: float
+    - t_day_money: float
+    + __new__(cls, *args, **kwargs): PlayerData
+    + __init__(self)
+    + get_money(self): float
+    + reset_day(self)
+    + day_end(self, rent: int)
+    + check_over(self): bool
+    + get_day(self): int
+    + get_mistakes(self): int
+    + get_drinks(self): int
+    + money_item_bonus(self): float
+    + money_day_bonus(self): float
+    + add_money(self, amount: float)
+    + minus_money(self, amount: float)
+    + add_day_money(self, amount: float)
+    + add_day_mistakes(self)
+    + add_day_drinks(self)
+    + add_day_customers(self)
+    + get_items(self): list
+    + add_item(self, item: dict)
+    + __repr__(self): str
+}
+
+class DataManager {
+    - __instance: DataManager
+    - initialized: bool
+    - cus_data: DataFrame
+    - player: DataFrame
+    - items: DataFrame
+    - menu: DataFrame
+    + __new__(cls, *args, **kwargs): DataManager
+    + __init__(self)
+    + rcsv(self, path: str): DataFrame
+    + get_data(self, want: str): DataFrame
+    + add_player_data(self, data: PlayerData)
+    + add_cus_data(self, data: dict)
+    + save_data(self)
+}
+
+
+class SoundManager {
+    - __instance: SoundManager
+    - initialized: bool
+    - background_music_list: list
+    - music_state: bool
+    - current_music_index: int
+    - music_lenfgt: float
+    + __new__(cls, *args, **kwargs): SoundManager
+    + __init__(self)
+    + play_music(self)
+    + next_music(self)
+    + music_ctrl(self)
+    + prev_music(self)
+    + get_state(self): bool
+    + get_music_data(self): float
+    + get_music_name(self): str
+    + get_current_music_percent(self): float
+    + get_music_time(self): tuple
+    + get_artist(self): str
+}
+
+class MenuGUI {
+    - filter: str
+    - flavour_filter: str
+    - type_filter: str
+    - __menu: DataManager
+    - items: DataFrame
+    - scrollable_frame: Frame
+    + __init__(self)
+    + create_filter_buttons(self, parent)
+    + apply_filter(self, filter_value: str, filter_category: str)
+    + create_scrollable_menus(self)
+    + populate_items(self)
+}
+
+
+class ShopGUI {
+    - items: list
+    - balance: float
+    - balance_label: Label
+    - scrollable_frame: Frame
+    + __init__(self)
+    + create_scrollable_shop(self)
+    + populate_items(self)
+    + buy_item(self, item: dict)
+}
+
+
+class Game_UI {
+    - __screen: Surface
+    - shaker_frame: int
+    + __init__(self)
+    + draw_shaker(self, mixer: Mixer, drink=None)
+    + draw_timer(self, time: int)
+    + draw_money(self)
+    + draw_track(self)
+    + draw_day(self)
+    + draw_mixer(self, mixer: Mixer)
+}
+
+
+class Config {
+    + game_width: int
+    + game_height: int
+    + fps: int
+    + panel_size: tuple
+    + game_color: dict
+    + counter_loc: dict
+    + counter_size: tuple
+    + shaker_size: tuple
+    + aged_rocks_loc: dict
+    + Text_loc: tuple
+    + Text_size: int
+    + aged_rocks_size: tuple
+}
+
+class Draw_manager {
+    - __instance: Draw_manager
+    - __screen: Surface
+    - __clock: Clock
+    - __ui: Game_UI
+    - __cus_alpha: int
+    - __line_alpha: int
+    + __new__(cls, *args, **kwargs): Draw_manager
+    + get_instance(cls): Draw_manager
+    + GetColor(k: str): tuple
+    + __init__(self)
+    + get_screen(self): Surface
+    + reset_cus_alpha(self): bool
+    + reset_line_alpha(self)
+    + draw(self, state: str)
+    + mixer(self, mixer: Mixer, drink=None)
+    + background(self, state: str)
+    + draw_end(self, player: PlayerData, rent: int)
+    + draw_over(self, player: PlayerData)
+    + draw_day(self)
+    + draw_chat(self, text: str)
+    + draw_character(self, character: tuple, state: int)
+    + draw_time(self, time: int)
+    + draw_customer(self, customer: Customer)
+    + UpdateAll(self, state: str)
+}
+
+class DataVisualizer {
+    - str output_dir
+    - DataFrame customer_data
+    - DataFrame player_data
+    - DataFrame item_data
+    + DataVisualizer(output_dir: str="data/graph")
+    + void load_customer_data()
+    + void load_player_data()
+    + void load_item_data()
+    + void plot_customer_frequency()
+    + void plot_customer_frequency_pie()
+    + void plot_customer_satisfaction()
+    + void plot_average_money_per_day()
+    + void plot_player_money_vs_rent(player_id: int)
+    + void plot_average_player_money_vs_rent()
+    + void plot_item_purchase_frequency()
+    + void plot_item_correlation()
+    + void run_all_methods()
+}
+
+class Customer {
+    - loc: tuple
+    - sprite: tuple
+    - name: str
+    - fdrinks: list
+    - line: str
+    - prevference: str
+    - state: int
+    - satisfaction: int
+    + __init__(self)
+    + __repr__(self): str
+    + get_drink(self): list
+    + get_order(self)
+    + give_drink(self, drink: str): bool
+    + get_customer(cls): Customer
+}
+
+class male_npc {
+    + __init__(self)
+    + randrink(self)
+    + get_sprite(self): tuple
+}
+
+class female_npc {
+    + __init__(self)
+    + randrink(self)
+    + get_sprite(self): tuple
+}
+
+class pixelmiku {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self): bool
+    + give_drink(self, drink: str): bool
+}
+
+class sans {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self): bool
+    + give_drink(self, drink: str): bool
+}
+
+class mark {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self): bool
+    + give_drink(self, drink: str): bool
+}
+
+class cyberman {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self)
+    + give_drink(self, drink: str): bool
+}
+
+class dalek {
+    + __init__(self)
+    + get_sprite(self): tuple
+    + randrink(self)
+    + get_order(self)
+    + give_drink(self, drink: str): bool
+}
+
+class thedoctor {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self)
+    + give_drink(self, drink: str): bool
+}
+
+class masterchief {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self): bool
+    + give_drink(self, drink: str): bool
+}
+
+class bigboss {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self): bool
+    + give_drink(self, drink: str): bool
+}
+
+class kiryu {
+    + __init__(self)
+    + randrink(self)
+    + get_order(self)
+}
+
+' Relationships
+StartMenuUI --> DataVisualizer
+StartMenuUI --> Game
+StartMenuUI --> MenuGUI
+Game --> DataManager
+Game --> Draw_manager
+Game --> Mixer
+Game --> Drinks
+Game --> SoundManager
+Game --> PlayerData
+Game --> ShopGUI
+Game --> Customer
+Customer <|-- male_npc
+Customer <|-- female_npc
+Customer <|-- pixelmiku
+Customer <|-- sans
+Customer <|-- mark
+Customer <|-- cyberman
+Customer <|-- dalek
+Customer <|-- thedoctor
+Customer <|-- masterchief
+Customer <|-- bigboss
+Customer <|-- kiryu
+Drinks --> Mixer
+Drinks --> DataManager
+DataManager --> PlayerData
+MenuGUI --> DataManager
+ShopGUI --> DataManager
+ShopGUI --> PlayerData
+Game_UI --> Mixer
+Game_UI --> PlayerData
+Game_UI --> SoundManager
+Draw_manager --> Game_UI
+Draw_manager --> Mixer
+Draw_manager --> PlayerData
+Draw_manager --> Customer
+
+@enduml

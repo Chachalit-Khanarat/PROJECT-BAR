@@ -1,0 +1,55 @@
+@startuml
+class PlayerData {
+    - __instance: PlayerData
+    - __player_id: int
+    - __money: float
+    - __day: int
+    - __mistakes: int
+    - __drinks: int
+    - __customers: int
+    - __items: list
+    - day_mistakes: int
+    - day_drinks: int
+    - day_customers: int
+    - day_money: float
+    - t_day_money: float
+    + __new__(cls, *args, **kwargs): PlayerData
+    + __init__(self)
+    + get_money(self): float
+    + reset_day(self)
+    + day_end(self, rent: int)
+    + check_over(self): bool
+    + get_day(self): int
+    + get_mistakes(self): int
+    + get_drinks(self): int
+    + money_item_bonus(self): float
+    + money_day_bonus(self): float
+    + add_money(self, amount: float)
+    + minus_money(self, amount: float)
+    + add_day_money(self, amount: float)
+    + add_day_mistakes(self)
+    + add_day_drinks(self)
+    + add_day_customers(self)
+    + get_items(self): list
+    + add_item(self, item: dict)
+    + __repr__(self): str
+}
+
+class DataManager {
+    - __instance: DataManager
+    - initialized: bool
+    - cus_data: DataFrame
+    - player: DataFrame
+    - items: DataFrame
+    - menu: DataFrame
+    + __new__(cls, *args, **kwargs): DataManager
+    + __init__(self)
+    + rcsv(self, path: str): DataFrame
+    + get_data(self, want: str): DataFrame
+    + add_player_data(self, data: PlayerData)
+    + add_cus_data(self, data: dict)
+    + save_data(self)
+}
+
+DataManager --> PlayerData
+@enduml

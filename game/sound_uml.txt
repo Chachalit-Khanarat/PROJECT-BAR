@@ -1,0 +1,22 @@
+@startuml
+class SoundManager {
+    - __instance: SoundManager
+    - initialized: bool
+    - background_music_list: list
+    - music_state: bool
+    - current_music_index: int
+    - music_lenfgt: float
+    + __new__(cls, *args, **kwargs): SoundManager
+    + __init__(self)
+    + play_music(self)
+    + next_music(self)
+    + music_ctrl(self)
+    + prev_music(self)
+    + get_state(self): bool
+    + get_music_data(self): float
+    + get_music_name(self): str
+    + get_current_music_percent(self): float
+    + get_music_time(self): tuple
+    + get_artist(self): str
+}
+@enduml

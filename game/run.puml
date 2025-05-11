@@ -1,0 +1,19 @@
+@startuml
+
+class StartMenuUI {
+    - DataVisualizer __graph
+    + StartMenuUI()
+    + void start_game()
+    + void run_game()
+    + void run_menu()
+    + void show_statistics()
+    + void show_player_statistics()
+    + void show_player_graph()
+    + void open_settings()
+}
+
+StartMenuUI --> DataVisualizer
+StartMenuUI --> Game
+StartMenuUI --> MenuGUI
+
+@enduml

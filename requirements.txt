@@ -1,0 +1,7 @@
+pygame==2.1.2
+mutagen==1.45.1
+pandas
+PyQt5==5.15.6
+matplotlib
+seaborn
+numpy

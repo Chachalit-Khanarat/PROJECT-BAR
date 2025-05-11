@@ -1,0 +1,16 @@
+@startuml
+class Config {
+    + game_width: int
+    + game_height: int
+    + fps: int
+    + panel_size: tuple
+    + game_color: dict
+    + counter_loc: dict
+    + counter_size: tuple
+    + shaker_size: tuple
+    + aged_rocks_loc: dict
+    + Text_loc: tuple
+    + Text_size: int
+    + aged_rocks_size: tuple
+}
+@enduml

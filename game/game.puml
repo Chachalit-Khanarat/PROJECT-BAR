@@ -1,0 +1,42 @@
+@startuml
+
+class Game {
+    - DataManager __data
+    - Draw_manager __draw
+    - Mixer __mixer
+    - Drinks __drinks
+    - SoundManager __sound
+    - PlayerData __player
+    - str __mode
+    - str __state
+    - int start_ticks
+    - int timer
+    - float rent
+    - ShopGUI __shop
+    - str __drink
+    - Customer __customer
+    + Game(mode: str="endless")
+    + static Game get_instance()
+    + str get_state()
+    + SoundManager get_sound()
+    + void new_rent()
+    + void game_reset()
+    + void gameupdate()
+    + int get_time_left()
+    + void day_end()
+    + void customer_update()
+    + void drink_update()
+    + void run()
+    + str __repr__()
+}
+
+Game --> DataManager
+Game --> Draw_manager
+Game --> Mixer
+Game --> Drinks
+Game --> SoundManager
+Game --> PlayerData
+Game --> ShopGUI
+Game --> Customer
+
+@enduml

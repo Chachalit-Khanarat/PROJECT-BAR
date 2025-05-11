@@ -1,0 +1,17 @@
+@startuml
+class Game_UI {
+    - __screen: Surface
+    - shaker_frame: int
+    + __init__(self)
+    + draw_shaker(self, mixer: Mixer, drink=None)
+    + draw_timer(self, time: int)
+    + draw_money(self)
+    + draw_track(self)
+    + draw_day(self)
+    + draw_mixer(self, mixer: Mixer)
+}
+
+Game_UI --> Mixer
+Game_UI --> PlayerData
+Game_UI --> SoundManager
+@enduml
