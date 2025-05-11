@@ -114,3 +114,4 @@ sprite,name,fdrinks,line,prevference,state,satisfaction,loc
 "('chief.png', (199.9, 131.6))",Master Chief,"['Fringe_Weaver', 'Gut_Punch', 'Marsblast', 'Piano_Man']",Master Chief : Perfect. You’ve got a steady hand. Appreciate it.,Strong,1,1,
 "('male2.png', (161.8, 47.2))",James,['Sunshine_Cloud'],James : This is not what I wanted.,Girly,1,0,
 "('female2.png', (220.6, 156.3))",Lele,"['Bad_Touch', 'Brandtini', 'Cobalt_Velvet', 'Flaming_Moai', 'Fringe_Weaver', 'Mercuryblast']",Lele : Spot on! This is fantastic!,Classy,1,1,
+"('male1.png', (210.6, 132.6))",Mike,['Blue_Fairy'],Mike : Perfect! You nailed it!,Girly,1,1,

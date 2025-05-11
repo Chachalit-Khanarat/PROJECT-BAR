@@ -5,7 +5,7 @@ from data_manager import *
 class MenuGUI(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("Shop")
+        self.title("MENUS")
         self.geometry("1700x600")
         self.configure(bg="black")  # Set background color to black
 

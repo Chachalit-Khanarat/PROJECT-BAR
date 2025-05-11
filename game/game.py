@@ -32,7 +32,7 @@ class Game:
             self.__mode = mode
             self.__state = "talk"
             self.start_ticks = pg.time.get_ticks()
-            self.timer = 1000 * 30
+            self.timer = 1000 * 60 * 2
 
             self.rent = 150
 
